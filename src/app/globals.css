@@ -1,22 +1,33 @@
 @import "tailwindcss";
 
+/*
+ * Single source of truth for the site's color palette.
+ * Change a value here and it updates everywhere the corresponding
+ * Tailwind utility (bg-primary, text-primary, etc.) is used.
+ */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Main brand color, sampled from the church's front door. */
+  --color-primary: #2f9e89;
+  --color-primary-light: #8fe4d2;
+  --color-primary-dark: #1f7a69;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-white: var(--color-white);
+  --color-black: var(--color-black);
+  --color-primary: var(--color-primary);
+  --color-primary-light: var(--color-primary-light);
+  --color-primary-dark: var(--color-primary-dark);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
