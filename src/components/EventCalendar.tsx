@@ -85,74 +85,76 @@ export function EventCalendar({ events }: EventCalendarProps) {
   const selectedEvents = selectedDate ? (eventsByDate.get(selectedDate) ?? []) : [];
 
   return (
-    <div>
-      <div className="flex items-center justify-between gap-4">
-        <button
-          type="button"
-          onClick={() => goToMonth(-1)}
-          aria-label="Previous month"
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 text-zinc-600 transition-colors hover:bg-zinc-50"
-        >
-          &lsaquo;
-        </button>
-        <div className="flex items-center gap-3">
-          <p className="text-lg font-semibold text-zinc-900">{monthLabel(currentYear, currentMonth)}</p>
+    <div className="lg:flex lg:items-start lg:gap-10">
+      <div className="lg:w-[380px] lg:flex-shrink-0">
+        <div className="flex items-center justify-between gap-4">
           <button
             type="button"
-            onClick={goToToday}
-            className="rounded-full border border-black/10 px-3 py-1 text-xs font-semibold text-zinc-600 transition-colors hover:bg-zinc-50"
+            onClick={() => goToMonth(-1)}
+            aria-label="Previous month"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 text-zinc-600 transition-colors hover:bg-zinc-50"
           >
-            Today
+            &lsaquo;
+          </button>
+          <div className="flex items-center gap-3">
+            <p className="text-lg font-semibold text-zinc-900">{monthLabel(currentYear, currentMonth)}</p>
+            <button
+              type="button"
+              onClick={goToToday}
+              className="rounded-full border border-black/10 px-3 py-1 text-xs font-semibold text-zinc-600 transition-colors hover:bg-zinc-50"
+            >
+              Today
+            </button>
+          </div>
+          <button
+            type="button"
+            onClick={() => goToMonth(1)}
+            aria-label="Next month"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 text-zinc-600 transition-colors hover:bg-zinc-50"
+          >
+            &rsaquo;
           </button>
         </div>
-        <button
-          type="button"
-          onClick={() => goToMonth(1)}
-          aria-label="Next month"
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 text-zinc-600 transition-colors hover:bg-zinc-50"
-        >
-          &rsaquo;
-        </button>
+
+        <div className="mt-6 grid grid-cols-7 gap-1 text-center text-xs font-semibold uppercase tracking-wider text-zinc-500">
+          {WEEKDAY_LABELS.map((label) => (
+            <div key={label} className="py-2">
+              {label}
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-7 gap-1">
+          {cells.map((dateString, index) => {
+            if (!dateString) return <div key={`blank-${index}`} />;
+
+            const dayEvents = eventsByDate.get(dateString) ?? [];
+            const isToday = dateString === today;
+            const isSelected = dateString === selectedDate;
+            const dayNumber = Number(dateString.slice(-2));
+
+            return (
+              <button
+                key={dateString}
+                type="button"
+                onClick={() => setSelectedDate(dateString)}
+                className={`flex aspect-square flex-col items-center justify-center gap-1 rounded-lg border text-sm transition-colors ${
+                  isSelected
+                    ? "border-primary bg-primary/10 font-semibold text-zinc-900"
+                    : isToday
+                      ? "border-primary/50 text-zinc-900"
+                      : "border-transparent text-zinc-700 hover:bg-zinc-50"
+                }`}
+              >
+                <span>{dayNumber}</span>
+                {dayEvents.length > 0 && <span className="h-1.5 w-1.5 rounded-full bg-primary" />}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      <div className="mt-6 grid grid-cols-7 gap-1 text-center text-xs font-semibold uppercase tracking-wider text-zinc-500">
-        {WEEKDAY_LABELS.map((label) => (
-          <div key={label} className="py-2">
-            {label}
-          </div>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-7 gap-1">
-        {cells.map((dateString, index) => {
-          if (!dateString) return <div key={`blank-${index}`} />;
-
-          const dayEvents = eventsByDate.get(dateString) ?? [];
-          const isToday = dateString === today;
-          const isSelected = dateString === selectedDate;
-          const dayNumber = Number(dateString.slice(-2));
-
-          return (
-            <button
-              key={dateString}
-              type="button"
-              onClick={() => setSelectedDate(dateString)}
-              className={`flex aspect-square flex-col items-center justify-center gap-1 rounded-lg border text-sm transition-colors ${
-                isSelected
-                  ? "border-primary bg-primary/10 font-semibold text-zinc-900"
-                  : isToday
-                    ? "border-primary/50 text-zinc-900"
-                    : "border-transparent text-zinc-700 hover:bg-zinc-50"
-              }`}
-            >
-              <span>{dayNumber}</span>
-              {dayEvents.length > 0 && <span className="h-1.5 w-1.5 rounded-full bg-primary" />}
-            </button>
-          );
-        })}
-      </div>
-
-      <div className="mt-8">
+      <div className="mt-8 lg:mt-0 lg:flex-1 lg:border-l lg:border-black/10 lg:pl-10">
         {!selectedDate ? (
           <p className="text-sm text-zinc-600">Select a day to see its events.</p>
         ) : (
@@ -161,7 +163,7 @@ export function EventCalendar({ events }: EventCalendarProps) {
             {selectedEvents.length === 0 ? (
               <p className="mt-3 text-sm text-zinc-600">No events on this day.</p>
             ) : (
-              <div className="mt-3 grid gap-4 sm:grid-cols-2">
+              <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
                 {selectedEvents.map((event) => (
                   <Card key={event.id}>
                     <p className="text-lg font-semibold text-zinc-900">{event.title}</p>
