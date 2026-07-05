@@ -11,7 +11,7 @@ export default function Home() {
         eyebrow="Welcome"
         title={siteConfig.tagline}
         description={siteConfig.description}
-        backgroundImage="/pictures/Church-picture.jpeg"
+        backgroundImage="/pictures/PBCOrlean-logo.png"
       >
         <Button href="/service-times">Plan Your Visit</Button>
         <Button href="/about" variant="secondary">
