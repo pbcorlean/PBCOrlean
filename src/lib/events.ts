@@ -1,4 +1,6 @@
 import ical from "node-ical";
+import { formatInTimeZone, fromZonedTime, toZonedTime } from "date-fns-tz";
+import { CHURCH_TIME_ZONE } from "@/lib/timezone";
 
 export interface ChurchEvent {
   id: string;
@@ -14,6 +16,7 @@ export interface CalendarSource {
 }
 
 const RANGE_DAYS_AHEAD = 365;
+const RANGE_DAYS_BEHIND = 365;
 
 // CALENDAR_ICS_URLS holds one or more published Outlook "ICS" links, as
 // `Label|https://...` pairs separated by commas, e.g.
@@ -30,8 +33,28 @@ export function getCalendarSources(): CalendarSource[] {
     });
 }
 
+// Recurring events from this Outlook feed advance in fixed UTC increments,
+// which drifts the displayed local time by an hour whenever a DST change
+// falls between the original event and a later occurrence (e.g. a 7:00 PM
+// Eastern service would show as 6:00 PM once the clocks fall back). This
+// re-anchors each occurrence to the same Eastern wall-clock time as the
+// original event, on that occurrence's calendar day.
+function alignToWallClock(occurrence: Date, wallClockSource: Date): Date {
+  const zonedOccurrence = toZonedTime(occurrence, CHURCH_TIME_ZONE);
+  const zonedWallClock = toZonedTime(wallClockSource, CHURCH_TIME_ZONE);
+  const combined = new Date(
+    zonedOccurrence.getFullYear(),
+    zonedOccurrence.getMonth(),
+    zonedOccurrence.getDate(),
+    zonedWallClock.getHours(),
+    zonedWallClock.getMinutes(),
+    zonedWallClock.getSeconds(),
+  );
+  return fromZonedTime(combined, CHURCH_TIME_ZONE);
+}
+
 function formatTime(date: Date) {
-  return date.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+  return formatInTimeZone(date, CHURCH_TIME_ZONE, "h:mm a");
 }
 
 function toChurchEvent(
@@ -47,7 +70,7 @@ function toChurchEvent(
   return {
     id,
     title: summary || "Untitled Event",
-    date: start.toISOString().slice(0, 10),
+    date: formatInTimeZone(start, CHURCH_TIME_ZONE, "yyyy-MM-dd"),
     time,
     description: (description ?? "").replace(/<[^>]*>/g, "").trim(),
   };
@@ -56,6 +79,7 @@ function toChurchEvent(
 async function fetchCalendarEvents(url: string): Promise<ChurchEvent[]> {
   const data = await ical.async.fromURL(url);
   const now = new Date();
+  const rangeStart = new Date(now.getTime() - RANGE_DAYS_BEHIND * 24 * 60 * 60 * 1000);
   const rangeEnd = new Date(now.getTime() + RANGE_DAYS_AHEAD * 24 * 60 * 60 * 1000);
   const events: ChurchEvent[] = [];
 
@@ -65,16 +89,21 @@ async function fetchCalendarEvents(url: string): Promise<ChurchEvent[]> {
     const allDay = component.datetype === "date";
 
     if (component.rrule) {
-      const occurrences = component.rrule.between(now, rangeEnd, true);
-      const durationMs = component.end ? component.end.getTime() - component.start.getTime() : 0;
+      const occurrences = component.rrule.between(rangeStart, rangeEnd, true);
 
       for (const occurrence of occurrences) {
         const dateKey = occurrence.toISOString().slice(0, 10);
         if (component.exdate?.[dateKey]) continue;
 
         const recurrence = component.recurrences?.[dateKey];
-        const start = recurrence?.start ?? occurrence;
-        const end = recurrence?.end ?? (durationMs ? new Date(occurrence.getTime() + durationMs) : start);
+        const start = recurrence?.start ?? (allDay ? occurrence : alignToWallClock(occurrence, component.start));
+        const end =
+          recurrence?.end ??
+          (allDay
+            ? occurrence
+            : component.end
+              ? alignToWallClock(occurrence, component.end)
+              : start);
 
         events.push(
           toChurchEvent(
@@ -87,7 +116,7 @@ async function fetchCalendarEvents(url: string): Promise<ChurchEvent[]> {
           ),
         );
       }
-    } else if (component.start >= now && component.start <= rangeEnd) {
+    } else if (component.start >= rangeStart && component.start <= rangeEnd) {
       events.push(
         toChurchEvent(component.uid, component.summary, component.description, component.start, component.end ?? component.start, allDay),
       );
