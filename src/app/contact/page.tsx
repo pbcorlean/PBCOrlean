@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ContactForm } from "@/components/ContactForm";
+import { MapEmbed } from "@/components/MapEmbed";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -44,9 +45,10 @@ export default function ContactPage() {
             </p>
           </address>
 
-          {/* TODO: replace with an embedded Google Maps iframe using the church's address */}
-          <div className="mt-8 flex h-72 items-center justify-center rounded-xl border border-dashed border-black/20 bg-zinc-50 text-sm text-zinc-500">
-            Map placeholder
+          <div className="mt-8">
+            <MapEmbed
+              address={`${siteConfig.address.street}, ${siteConfig.address.city}, ${siteConfig.address.state} ${siteConfig.address.zip}`}
+            />
           </div>
         </div>
       </section>

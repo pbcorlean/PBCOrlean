@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceTimesList } from "@/components/ServiceTimesList";
+import { MapEmbed } from "@/components/MapEmbed";
 import { serviceTimes, siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -28,9 +29,10 @@ export default function ServiceTimesPage() {
             title="Getting Here"
             description={`${siteConfig.address.street}, ${siteConfig.address.city}, ${siteConfig.address.state} ${siteConfig.address.zip}`}
           />
-          {/* TODO: replace with an embedded Google Maps iframe using the church's address */}
-          <div className="mt-8 flex h-72 items-center justify-center rounded-xl border border-dashed border-black/20 bg-white text-sm text-zinc-500">
-            Map placeholder
+          <div className="mt-8">
+            <MapEmbed
+              address={`${siteConfig.address.street}, ${siteConfig.address.city}, ${siteConfig.address.state} ${siteConfig.address.zip}`}
+            />
           </div>
         </div>
       </section>
