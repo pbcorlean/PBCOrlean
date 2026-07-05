@@ -51,9 +51,11 @@ export function Footer() {
 
         <div>
           <p className="text-sm font-semibold text-zinc-900">Service Times</p>
-          <ul className="mt-2 space-y-1 text-sm text-zinc-600">
+          <ul className="mt-2 space-y-2 text-sm text-zinc-600">
             {serviceTimes.map((service) => (
               <li key={service.name}>
+                <span className="text-zinc-900">{service.name}</span>
+                <br />
                 {service.day} &middot; {service.time}
               </li>
             ))}
