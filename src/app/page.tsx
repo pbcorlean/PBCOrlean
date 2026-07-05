@@ -2,7 +2,7 @@ import { Hero } from "@/components/Hero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceTimesList } from "@/components/ServiceTimesList";
 import { Button } from "@/components/Button";
-import { serviceTimes, siteConfig } from "@/lib/site-config";
+import { fifthSundayNote, serviceTimes, siteConfig } from "@/lib/site-config";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
         eyebrow="Welcome"
         title={siteConfig.tagline}
         description={siteConfig.description}
-        backgroundImage="/pictures/PBCOrlean-logo.png"
+        backgroundImage="/pictures/Hero-photo.png"
       >
         <Button href="/service-times">Plan Your Visit</Button>
         <Button href="/about" variant="secondary">
@@ -27,6 +27,7 @@ export default function Home() {
         />
         <div className="mt-8">
           <ServiceTimesList services={serviceTimes} />
+          <p className="mt-4 text-sm text-zinc-500">{fifthSundayNote}</p>
         </div>
       </section>
 

@@ -23,6 +23,7 @@ export default function AboutPage() {
         eyebrow="About Us"
         title={`Welcome to ${siteConfig.name}`}
         description={siteConfig.description}
+        backgroundImage="/pictures/Hero-photo.png"
       />
 
       <section className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-16 lg:grid-cols-2 lg:items-center">

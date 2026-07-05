@@ -15,6 +15,7 @@ export default function GivePage() {
         eyebrow="Generosity"
         title="Give"
         description="Your generosity helps support our church family and our ministry in the Orlean community."
+        backgroundImage="/pictures/Hero-photo.png"
       />
 
       <section className="mx-auto w-full max-w-6xl px-6 py-16">
@@ -24,16 +25,16 @@ export default function GivePage() {
           <Card>
             <p className="text-lg font-semibold text-zinc-900">Online</p>
             <p className="mt-2 text-sm text-zinc-600">
-              Give securely online. {/* TODO: connect a giving processor (e.g. Tithe.ly, Givelify, PayPal Giving Fund) and link the button below */}
+              Give securely online through Tithe.ly.
             </p>
-            <button
-              type="button"
-              disabled
-              className="mt-4 w-full cursor-not-allowed rounded-full bg-zinc-200 px-6 py-3 text-sm font-semibold text-zinc-500"
-              title="Online giving is not set up yet"
+            <a
+              href={siteConfig.givingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-black transition-colors hover:bg-primary-dark"
             >
-              Give Online (Coming Soon)
-            </button>
+              Give Online
+            </a>
           </Card>
 
           <Card>
@@ -53,8 +54,9 @@ export default function GivePage() {
           <Card>
             <p className="text-lg font-semibold text-zinc-900">In Person</p>
             <p className="mt-2 text-sm text-zinc-600">
-              Offering is collected during our Sunday Service, held 11:00 AM &ndash;
-              1:00 PM on the first four Sundays of each month.
+              Offering is collected during our Sunday Service, held at 11:00 AM
+              on the 1st, 2nd, and 3rd Sundays and 10:00 AM on the 4th Sunday
+              of each month.
             </p>
           </Card>
         </div>

@@ -29,6 +29,7 @@ export const siteConfig = {
   },
   phone: "540-364-1284",
   email: "info@pbcorlean.org",
+  givingUrl: "https://give.tithe.ly/?formId=78e6290b-81ee-4301-90c5-dde3eae2683d",
   // TODO: replace with the church's actual social media page URLs
   social: [
     { label: "Facebook", href: "https://facebook.com" },
@@ -49,10 +50,22 @@ export const navItems: NavItem[] = [
 
 export const serviceTimes: ServiceTime[] = [
   {
+    name: "Sunday School",
+    day: "Sunday",
+    time: "10:00 AM - 11:00 AM",
+    description: "Held on the 1st, 2nd, and 3rd Sundays of the month.",
+  },
+  {
     name: "Sunday Service",
     day: "Sunday",
     time: "11:00 AM - 1:00 PM",
-    description: "Held on the first four Sundays of each month.",
+    description: "Held on the 1st, 2nd, and 3rd Sundays of the month.",
+  },
+  {
+    name: "Sunday Service (4th Sunday)",
+    day: "Sunday",
+    time: "10:00 AM",
+    description: "Service starts earlier on the fourth Sunday of the month.",
   },
   {
     name: "Bible Study",
@@ -61,3 +74,7 @@ export const serviceTimes: ServiceTime[] = [
     description: "Midweek study and prayer gathering for the whole family.",
   },
 ];
+
+// Note: there is no service on a fifth Sunday, when a month has one.
+export const fifthSundayNote =
+  "On months with a fifth Sunday, there is no service that day.";

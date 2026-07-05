@@ -14,6 +14,7 @@ export default function EventsPage() {
         eyebrow="What's Happening"
         title="Upcoming Events"
         description="Stay connected with what's going on in our church family."
+        backgroundImage="/pictures/Hero-photo.png"
       />
 
       <section className="mx-auto w-full max-w-6xl px-6 py-16">

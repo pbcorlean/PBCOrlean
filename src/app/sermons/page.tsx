@@ -14,6 +14,7 @@ export default function SermonsPage() {
         eyebrow="Media"
         title="Sermons"
         description="Catch up on recent messages from our worship gatherings."
+        backgroundImage="/pictures/Hero-photo.png"
       />
 
       <section className="mx-auto w-full max-w-6xl px-6 py-16">
