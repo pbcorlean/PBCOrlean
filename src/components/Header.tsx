@@ -10,21 +10,40 @@ export function Header() {
   const [isCompact, setIsCompact] = useState(false);
   const lastScrollY = useRef(0);
 
+  const lastToggleAt = useRef(0);
+
   useEffect(() => {
-    const SCROLL_THRESHOLD = 10;
+    const SCROLL_THRESHOLD = 20;
+    const COMPACT_BREAKPOINT = 768;
+    const TOGGLE_COOLDOWN_MS = 400;
 
     function handleScroll() {
+      // Only collapse on desktop-width screens; leave mobile alone.
+      if (window.innerWidth < COMPACT_BREAKPOINT) {
+        setIsCompact(false);
+        return;
+      }
+
+      // Ignore scroll events while the previous toggle's transition is
+      // still settling, so the resulting layout shift isn't mistaken
+      // for further user scrolling.
+      const now = Date.now();
+      if (now - lastToggleAt.current < TOGGLE_COOLDOWN_MS) return;
+
       const currentY = window.scrollY;
       const delta = currentY - lastScrollY.current;
 
       if (currentY <= 80) {
         setIsCompact(false);
+        lastToggleAt.current = now;
         lastScrollY.current = currentY;
       } else if (delta > SCROLL_THRESHOLD) {
         setIsCompact(true);
+        lastToggleAt.current = now;
         lastScrollY.current = currentY;
       } else if (delta < -SCROLL_THRESHOLD) {
         setIsCompact(false);
+        lastToggleAt.current = now;
         lastScrollY.current = currentY;
       }
     }

@@ -32,7 +32,7 @@ export function Hero({
             fill
             priority
             sizes="100vw"
-            className="object-cover object-top"
+            className="object-contain sm:object-cover sm:object-top"
           />
           <div className="absolute inset-0 bg-zinc-900/70" />
         </>
