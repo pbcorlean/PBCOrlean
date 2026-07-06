@@ -14,10 +14,16 @@ interface HeroProps {
 function HeroBackground({
   backgroundImage,
   desktopBackgroundImage,
+  desktopFit = "cover",
 }: {
   backgroundImage?: string;
   desktopBackgroundImage?: string;
+  desktopFit?: "cover" | "contain";
 }) {
+  const desktopFitClass = desktopFit === "contain" ? "object-contain" : "object-cover object-top";
+  const mobileImageDesktopClasses =
+    desktopFit === "contain" ? "sm:object-contain" : "sm:object-cover sm:object-top";
+
   return (
     <>
       {backgroundImage && (
@@ -27,7 +33,7 @@ function HeroBackground({
           fill
           priority
           sizes="100vw"
-          className={`object-contain ${desktopBackgroundImage ? "sm:hidden" : "sm:object-cover sm:object-top"}`}
+          className={`object-contain ${desktopBackgroundImage ? "sm:hidden" : mobileImageDesktopClasses}`}
         />
       )}
       {desktopBackgroundImage && (
@@ -37,7 +43,7 @@ function HeroBackground({
           fill
           priority
           sizes="100vw"
-          className="hidden object-cover object-top sm:block"
+          className={`hidden sm:block ${desktopFitClass}`}
         />
       )}
     </>
@@ -56,8 +62,12 @@ export function Hero({
   if (size === "default") {
     return (
       <>
-        <div className="relative h-[350px] overflow-hidden border-b border-black/10 bg-zinc-900">
-          <HeroBackground backgroundImage={backgroundImage} desktopBackgroundImage={desktopBackgroundImage} />
+        <div className="relative h-[350px] overflow-hidden border-b border-black/10 bg-white">
+          <HeroBackground
+            backgroundImage={backgroundImage}
+            desktopBackgroundImage={desktopBackgroundImage}
+            desktopFit="contain"
+          />
         </div>
         <div className="mx-auto w-full max-w-6xl px-6 py-12">
           {eyebrow && (
