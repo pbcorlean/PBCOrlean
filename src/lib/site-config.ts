@@ -18,7 +18,7 @@ export interface SocialLink {
 export const siteConfig = {
   name: "Providence Baptist Church",
   shortName: "Providence Baptist",
-  tagline: "Growing in Faith, Rooted in Love",
+  tagline: "A Going Church for a Coming Christ!",
   description:
     "A welcoming church family in Orlean serving God and our community through worship, fellowship, and outreach.",
   address: {
