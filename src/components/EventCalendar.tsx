@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { ChurchEvent } from "@/lib/events";
 import { CHURCH_TIME_ZONE } from "@/lib/timezone";
 import { Card } from "@/components/Card";
@@ -40,6 +40,16 @@ export function EventCalendar({ events }: EventCalendarProps) {
   const [currentYear, setCurrentYear] = useState(todayYear);
   const [currentMonth, setCurrentMonth] = useState(todayMonth - 1);
   const [selectedDate, setSelectedDate] = useState<string | null>(today);
+  const [selectedEvent, setSelectedEvent] = useState<ChurchEvent | null>(null);
+
+  useEffect(() => {
+    if (!selectedEvent) return;
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setSelectedEvent(null);
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedEvent]);
 
   const eventsByDate = useMemo(() => {
     const map = new Map<string, ChurchEvent[]>();
@@ -165,17 +175,57 @@ export function EventCalendar({ events }: EventCalendarProps) {
             ) : (
               <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
                 {selectedEvents.map((event) => (
-                  <Card key={event.id}>
-                    <p className="text-lg font-semibold text-zinc-900">{event.title}</p>
-                    <p className="mt-1 text-sm text-zinc-500">{event.time}</p>
-                    {event.description && <p className="mt-3 text-sm text-zinc-600">{event.description}</p>}
-                  </Card>
+                  <button key={event.id} type="button" onClick={() => setSelectedEvent(event)} className="text-left">
+                    <Card className="transition-colors hover:border-primary/50 hover:bg-primary/5">
+                      <p className="text-lg font-semibold text-zinc-900">{event.title}</p>
+                      <p className="mt-1 text-sm text-zinc-500">{event.time}</p>
+                      {event.description && (
+                        <p className="mt-3 line-clamp-2 text-sm text-zinc-600">{event.description}</p>
+                      )}
+                    </Card>
+                  </button>
                 ))}
               </div>
             )}
           </>
         )}
       </div>
+
+      {selectedEvent && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"
+          onClick={() => setSelectedEvent(null)}
+        >
+          <div
+            className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-xl bg-white p-6 shadow-lg"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+                  {dayLabel(selectedEvent.date)}
+                </p>
+                <p className="mt-1 text-xl font-semibold text-zinc-900">{selectedEvent.title}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedEvent(null)}
+                aria-label="Close event details"
+                className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-black/10 text-zinc-600 transition-colors hover:bg-zinc-50"
+              >
+                &times;
+              </button>
+            </div>
+            <p className="mt-4 text-sm font-medium text-zinc-700">{selectedEvent.time}</p>
+            {selectedEvent.location && (
+              <p className="mt-1 text-sm text-zinc-500">{selectedEvent.location}</p>
+            )}
+            {selectedEvent.description && (
+              <p className="mt-4 whitespace-pre-line text-sm text-zinc-600">{selectedEvent.description}</p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

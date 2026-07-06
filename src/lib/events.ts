@@ -8,6 +8,7 @@ export interface ChurchEvent {
   date: string;
   time: string;
   description: string;
+  location: string;
 }
 
 export interface CalendarSource {
@@ -61,6 +62,7 @@ function toChurchEvent(
   id: string,
   summary: string | undefined,
   description: string | undefined,
+  location: string | undefined,
   start: Date,
   end: Date,
   allDay: boolean,
@@ -73,6 +75,7 @@ function toChurchEvent(
     date: formatInTimeZone(start, CHURCH_TIME_ZONE, "yyyy-MM-dd"),
     time,
     description: (description ?? "").replace(/<[^>]*>/g, "").trim(),
+    location: (location ?? "").trim(),
   };
 }
 
@@ -110,6 +113,7 @@ async function fetchCalendarEvents(url: string): Promise<ChurchEvent[]> {
             `${component.uid}-${dateKey}`,
             recurrence?.summary ?? component.summary,
             recurrence?.description ?? component.description,
+            recurrence?.location ?? component.location,
             start,
             end,
             allDay,
@@ -118,7 +122,15 @@ async function fetchCalendarEvents(url: string): Promise<ChurchEvent[]> {
       }
     } else if (component.start >= rangeStart && component.start <= rangeEnd) {
       events.push(
-        toChurchEvent(component.uid, component.summary, component.description, component.start, component.end ?? component.start, allDay),
+        toChurchEvent(
+          component.uid,
+          component.summary,
+          component.description,
+          component.location,
+          component.start,
+          component.end ?? component.start,
+          allDay,
+        ),
       );
     }
   }
