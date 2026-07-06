@@ -20,7 +20,7 @@ export function Hero({ eyebrow, title, description, children, backgroundImage }:
             fill
             priority
             sizes="100vw"
-            className="object-contain"
+            className="object-fill"
           />
           <div className="absolute inset-0 bg-zinc-900/70" />
         </>
