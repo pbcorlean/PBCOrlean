@@ -2,22 +2,44 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { navItems, siteConfig } from "@/lib/site-config";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCompact, setIsCompact] = useState(false);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    function handleScroll() {
+      const currentY = window.scrollY;
+      if (currentY > lastScrollY.current && currentY > 80) {
+        setIsCompact(true);
+      } else if (currentY < lastScrollY.current) {
+        setIsCompact(false);
+      }
+      lastScrollY.current = currentY;
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-black/10 bg-white/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur">
+      <div
+        className={`mx-auto flex max-w-6xl items-center justify-between px-6 transition-[padding] duration-300 ${
+          isCompact ? "py-2" : "py-4"
+        }`}
+      >
         <Link href="/" className="flex items-center gap-3">
           <Image
             src="/pictures/PBCOrlean-logo.png"
             alt={siteConfig.name}
             width={48}
             height={48}
-            className="h-12 w-12 rounded-full object-cover"
+            className={`rounded-full object-cover transition-[height,width] duration-300 ${
+              isCompact ? "h-9 w-9" : "h-12 w-12"
+            }`}
             priority
           />
           <span className="text-lg font-semibold tracking-tight text-zinc-900">
@@ -67,6 +89,8 @@ export function Header() {
           ))}
         </nav>
       )}
+
+      <div className="h-1 bg-primary" />
     </header>
   );
 }

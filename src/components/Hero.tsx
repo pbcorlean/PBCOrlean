@@ -21,7 +21,7 @@ export function Hero({
   return (
     <section
       className={`relative overflow-hidden border-b border-black/10 bg-zinc-900 ${
-        size === "large" ? "sm:flex sm:min-h-[85vh] sm:items-center" : ""
+        size === "large" ? "sm:flex sm:min-h-[92vh] sm:items-center" : ""
       }`}
     >
       {backgroundImage && (
@@ -32,7 +32,7 @@ export function Hero({
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className="object-cover object-top"
           />
           <div className="absolute inset-0 bg-zinc-900/70" />
         </>
