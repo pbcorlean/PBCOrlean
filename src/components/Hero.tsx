@@ -56,7 +56,7 @@ export function Hero({
   if (size === "default") {
     return (
       <>
-        <div className="relative h-56 overflow-hidden border-b border-black/10 bg-zinc-900 sm:h-72">
+        <div className="relative h-[350px] overflow-hidden border-b border-black/10 bg-zinc-900">
           <HeroBackground backgroundImage={backgroundImage} desktopBackgroundImage={desktopBackgroundImage} />
         </div>
         <div className="mx-auto w-full max-w-6xl px-6 py-12">
