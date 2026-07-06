@@ -47,13 +47,13 @@ export function Hero({
             {eyebrow}
           </p>
         )}
-        <h1 className="mt-3 max-w-2xl text-4xl font-bold tracking-tight text-white sm:text-5xl">
+        <h1 className="mt-3 max-w-2xl text-2xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
           {title}
         </h1>
         {description && (
           <p className="mt-5 max-w-xl text-lg text-zinc-300">{description}</p>
         )}
-        {children && <div className="mt-8 flex flex-wrap gap-4">{children}</div>}
+        {children && <div className="mt-8 flex flex-wrap gap-3 sm:gap-4">{children}</div>}
       </div>
     </section>
   );

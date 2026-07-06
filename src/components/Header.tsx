@@ -11,14 +11,22 @@ export function Header() {
   const lastScrollY = useRef(0);
 
   useEffect(() => {
+    const SCROLL_THRESHOLD = 10;
+
     function handleScroll() {
       const currentY = window.scrollY;
-      if (currentY > lastScrollY.current && currentY > 80) {
-        setIsCompact(true);
-      } else if (currentY < lastScrollY.current) {
+      const delta = currentY - lastScrollY.current;
+
+      if (currentY <= 80) {
         setIsCompact(false);
+        lastScrollY.current = currentY;
+      } else if (delta > SCROLL_THRESHOLD) {
+        setIsCompact(true);
+        lastScrollY.current = currentY;
+      } else if (delta < -SCROLL_THRESHOLD) {
+        setIsCompact(false);
+        lastScrollY.current = currentY;
       }
-      lastScrollY.current = currentY;
     }
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
