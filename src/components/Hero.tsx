@@ -21,7 +21,7 @@ export function Hero({
   return (
     <section
       className={`relative overflow-hidden border-b border-black/10 bg-zinc-900 ${
-        size === "large" ? "flex min-h-[85vh] items-center" : ""
+        size === "large" ? "sm:flex sm:min-h-[85vh] sm:items-center" : ""
       }`}
     >
       {backgroundImage && (
@@ -39,7 +39,7 @@ export function Hero({
       )}
       <div
         className={`relative mx-auto w-full max-w-6xl px-6 ${
-          size === "large" ? "py-16" : "py-20 sm:py-28"
+          size === "large" ? "py-20 sm:py-16" : "py-20 sm:py-28"
         }`}
       >
         {eyebrow && (
