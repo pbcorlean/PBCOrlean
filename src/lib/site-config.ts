@@ -30,17 +30,14 @@ export const siteConfig = {
   phone: "540-364-1284",
   email: "info@pbcorlean.org",
   givingUrl: "https://give.tithe.ly/?formId=78e6290b-81ee-4301-90c5-dde3eae2683d",
-  // TODO: replace with the church's actual social media page URLs
   social: [
-    { label: "Facebook", href: "https://facebook.com" },
-    { label: "YouTube", href: "https://youtube.com" },
-    { label: "Instagram", href: "https://instagram.com" },
+    { label: "Facebook", href: "https://www.facebook.com/ProvidenceBaptistChurchOrleanVA" },
   ] satisfies SocialLink[],
 };
 
 export const navItems: NavItem[] = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+  { label: "About Us", href: "/about" },
   { label: "Service Times", href: "/service-times" },
   { label: "Sermons", href: "/sermons" },
   { label: "Events", href: "/events" },
