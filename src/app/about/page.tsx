@@ -26,6 +26,7 @@ export default function AboutPage() {
         title={`Welcome to ${siteConfig.name}`}
         description={siteConfig.description}
         backgroundImage="/pictures/Hero-photo.png"
+        desktopBackgroundImage="/pictures/secondary-hero-desktop.png"
       />
 
       <section className="mx-auto w-full max-w-6xl px-6 py-16">

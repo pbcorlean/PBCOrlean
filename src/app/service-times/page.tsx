@@ -17,6 +17,7 @@ export default function ServiceTimesPage() {
         title="Service Times"
         description="We'd love for you to worship with us. Here's when we gather each week."
         backgroundImage="/pictures/Hero-photo.png"
+        desktopBackgroundImage="/pictures/secondary-hero-desktop.png"
       />
 
       <section className="mx-auto w-full max-w-6xl px-6 py-16">

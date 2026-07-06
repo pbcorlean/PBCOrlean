@@ -16,6 +16,7 @@ export default function GivePage() {
         title="Give"
         description="Your generosity helps support our church family and our ministry in the Orlean community."
         backgroundImage="/pictures/Hero-photo.png"
+        desktopBackgroundImage="/pictures/secondary-hero-desktop.png"
       />
 
       <section className="mx-auto w-full max-w-6xl px-6 py-16">

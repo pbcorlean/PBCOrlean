@@ -17,6 +17,7 @@ export default function ContactPage() {
         title="Contact Us"
         description="Have a question or want to get connected? We'd love to hear from you."
         backgroundImage="/pictures/Hero-photo.png"
+        desktopBackgroundImage="/pictures/secondary-hero-desktop.png"
       />
 
       <section className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-16 lg:grid-cols-2">

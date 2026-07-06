@@ -15,6 +15,7 @@ export default function SermonsPage() {
         title="Sermons"
         description="Catch up on recent messages from our worship gatherings."
         backgroundImage="/pictures/Hero-photo.png"
+        desktopBackgroundImage="/pictures/secondary-hero-desktop.png"
       />
 
       <section className="mx-auto w-full max-w-6xl px-6 py-16">

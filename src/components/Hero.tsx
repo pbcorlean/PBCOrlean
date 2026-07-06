@@ -7,7 +7,41 @@ interface HeroProps {
   description?: string;
   children?: ReactNode;
   backgroundImage?: string;
+  desktopBackgroundImage?: string;
   size?: "default" | "large";
+}
+
+function HeroBackground({
+  backgroundImage,
+  desktopBackgroundImage,
+}: {
+  backgroundImage?: string;
+  desktopBackgroundImage?: string;
+}) {
+  return (
+    <>
+      {backgroundImage && (
+        <Image
+          src={backgroundImage}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className={`object-contain ${desktopBackgroundImage ? "sm:hidden" : "sm:object-cover sm:object-top"}`}
+        />
+      )}
+      {desktopBackgroundImage && (
+        <Image
+          src={desktopBackgroundImage}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="hidden object-cover object-top sm:block"
+        />
+      )}
+    </>
+  );
 }
 
 export function Hero({
@@ -16,22 +50,14 @@ export function Hero({
   description,
   children,
   backgroundImage,
+  desktopBackgroundImage,
   size = "default",
 }: HeroProps) {
   if (size === "default") {
     return (
       <>
         <div className="relative h-56 overflow-hidden border-b border-black/10 bg-zinc-900 sm:h-72">
-          {backgroundImage && (
-            <Image
-              src={backgroundImage}
-              alt=""
-              fill
-              priority
-              sizes="100vw"
-              className="object-contain sm:object-cover sm:object-top"
-            />
-          )}
+          <HeroBackground backgroundImage={backgroundImage} desktopBackgroundImage={desktopBackgroundImage} />
         </div>
         <div className="mx-auto w-full max-w-6xl px-6 py-12">
           {eyebrow && (
@@ -54,14 +80,7 @@ export function Hero({
     <section className="relative overflow-hidden border-b border-black/10 bg-zinc-900 sm:flex sm:min-h-[92vh] sm:items-end">
       {backgroundImage && (
         <>
-          <Image
-            src={backgroundImage}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-contain sm:object-cover sm:object-top"
-          />
+          <HeroBackground backgroundImage={backgroundImage} desktopBackgroundImage={desktopBackgroundImage} />
           <div className="absolute inset-0 bg-zinc-900/70" />
         </>
       )}
