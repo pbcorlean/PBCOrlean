@@ -21,7 +21,7 @@ export function Hero({
   return (
     <section
       className={`relative overflow-hidden border-b border-black/10 bg-zinc-900 ${
-        size === "large" ? "sm:flex sm:min-h-[92vh] sm:items-center" : ""
+        size === "large" ? "sm:flex sm:min-h-[92vh] sm:items-end" : ""
       }`}
     >
       {backgroundImage && (
