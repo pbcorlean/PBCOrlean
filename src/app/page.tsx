@@ -12,6 +12,7 @@ export default function Home() {
         title={siteConfig.tagline}
         description={siteConfig.description}
         backgroundImage="/pictures/Hero-photo.png"
+        size="large"
       >
         <Button href="/service-times">Plan Your Visit</Button>
         <Button href="/about" variant="secondary">

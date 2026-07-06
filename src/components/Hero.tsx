@@ -7,11 +7,23 @@ interface HeroProps {
   description?: string;
   children?: ReactNode;
   backgroundImage?: string;
+  size?: "default" | "large";
 }
 
-export function Hero({ eyebrow, title, description, children, backgroundImage }: HeroProps) {
+export function Hero({
+  eyebrow,
+  title,
+  description,
+  children,
+  backgroundImage,
+  size = "default",
+}: HeroProps) {
   return (
-    <section className="relative overflow-hidden border-b border-black/10 bg-zinc-900">
+    <section
+      className={`relative overflow-hidden border-b border-black/10 bg-zinc-900 ${
+        size === "large" ? "flex min-h-[85vh] items-center" : ""
+      }`}
+    >
       {backgroundImage && (
         <>
           <Image
@@ -25,7 +37,11 @@ export function Hero({ eyebrow, title, description, children, backgroundImage }:
           <div className="absolute inset-0 bg-zinc-900/70" />
         </>
       )}
-      <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28">
+      <div
+        className={`relative mx-auto w-full max-w-6xl px-6 ${
+          size === "large" ? "py-16" : "py-20 sm:py-28"
+        }`}
+      >
         {eyebrow && (
           <p className="text-sm font-semibold uppercase tracking-wider text-primary-light">
             {eyebrow}
