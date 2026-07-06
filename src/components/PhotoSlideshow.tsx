@@ -1,14 +1,24 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface PhotoSlideshowProps {
   images: string[];
 }
 
+const AUTOPLAY_INTERVAL_MS = 4500;
+
 export function PhotoSlideshow({ images }: PhotoSlideshowProps) {
   const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (images.length < 2) return;
+    const timer = setInterval(() => {
+      setIndex((current) => (current + 1) % images.length);
+    }, AUTOPLAY_INTERVAL_MS);
+    return () => clearInterval(timer);
+  }, [images.length]);
 
   if (images.length === 0) return null;
 
@@ -25,7 +35,7 @@ export function PhotoSlideshow({ images }: PhotoSlideshowProps) {
           alt=""
           fill
           sizes="(min-width: 1024px) 768px, 100vw"
-          className="object-contain"
+          className="animate-photo-fade object-contain"
         />
       </div>
 
