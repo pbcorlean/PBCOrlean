@@ -18,12 +18,40 @@ export function Hero({
   backgroundImage,
   size = "default",
 }: HeroProps) {
+  if (size === "default") {
+    return (
+      <>
+        <div className="relative h-56 overflow-hidden border-b border-black/10 bg-zinc-900 sm:h-72">
+          {backgroundImage && (
+            <Image
+              src={backgroundImage}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-contain sm:object-cover sm:object-top"
+            />
+          )}
+        </div>
+        <div className="mx-auto w-full max-w-6xl px-6 py-12">
+          {eyebrow && (
+            <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+              {eyebrow}
+            </p>
+          )}
+          <h1 className="mt-3 max-w-2xl text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl">
+            {title}
+          </h1>
+          {description && (
+            <p className="mt-3 max-w-xl text-lg text-zinc-600">{description}</p>
+          )}
+        </div>
+      </>
+    );
+  }
+
   return (
-    <section
-      className={`relative overflow-hidden border-b border-black/10 bg-zinc-900 ${
-        size === "large" ? "sm:flex sm:min-h-[92vh] sm:items-end" : ""
-      }`}
-    >
+    <section className="relative overflow-hidden border-b border-black/10 bg-zinc-900 sm:flex sm:min-h-[92vh] sm:items-end">
       {backgroundImage && (
         <>
           <Image
@@ -37,11 +65,7 @@ export function Hero({
           <div className="absolute inset-0 bg-zinc-900/70" />
         </>
       )}
-      <div
-        className={`relative mx-auto w-full max-w-6xl px-6 ${
-          size === "large" ? "py-20 sm:py-16" : "py-20 sm:py-28"
-        }`}
-      >
+      <div className="relative mx-auto w-full max-w-6xl px-6 py-20 sm:py-16">
         {eyebrow && (
           <p className="text-sm font-semibold uppercase tracking-wider text-primary-light">
             {eyebrow}
