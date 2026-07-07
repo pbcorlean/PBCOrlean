@@ -16,6 +16,11 @@
   --color-primary: #3a3450;
   --color-primary-light: #c4c2cb;
   --color-primary-dark: #292438;
+
+  /* Secondary accent color. */
+  --color-secondary: #d4af37;
+  --color-secondary-light: #e8d385;
+  --color-secondary-dark: #a98a2a;
 }
 
 @theme inline {
@@ -26,6 +31,9 @@
   --color-primary: var(--color-primary);
   --color-primary-light: var(--color-primary-light);
   --color-primary-dark: var(--color-primary-dark);
+  --color-secondary: var(--color-secondary);
+  --color-secondary-light: var(--color-secondary-light);
+  --color-secondary-dark: var(--color-secondary-dark);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

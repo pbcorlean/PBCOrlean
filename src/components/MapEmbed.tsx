@@ -13,7 +13,7 @@ export function MapEmbed({ address, className = "" }: MapEmbedProps) {
       loading="lazy"
       referrerPolicy="no-referrer-when-downgrade"
       allowFullScreen
-      className={`h-72 w-full rounded-xl border border-black/10 ${className}`}
+      className={`h-72 w-full rounded-xl border border-primary/10 ${className}`}
     />
   );
 }

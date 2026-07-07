@@ -33,7 +33,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-t border-black/10 bg-zinc-50">
+      <section className="border-t border-primary/10 bg-primary/8">
         <div className="mx-auto w-full max-w-6xl px-6 py-16">
           <SectionHeading
             eyebrow="Visit In Person"

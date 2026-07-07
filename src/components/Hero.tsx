@@ -62,7 +62,7 @@ export function Hero({
   if (size === "default") {
     return (
       <>
-        <div className="relative h-[350px] overflow-hidden border-b border-black/10 bg-white">
+        <div className="relative h-[350px] overflow-hidden border-b border-primary/10 bg-white">
           <HeroBackground
             backgroundImage={backgroundImage}
             desktopBackgroundImage={desktopBackgroundImage}
@@ -87,11 +87,11 @@ export function Hero({
   }
 
   return (
-    <section className="relative overflow-hidden border-b border-black/10 bg-zinc-900 sm:flex sm:min-h-[92vh] sm:items-end">
+    <section className="relative overflow-hidden border-b border-primary/10 bg-primary sm:flex sm:min-h-[92vh] sm:items-end">
       {backgroundImage && (
         <>
           <HeroBackground backgroundImage={backgroundImage} desktopBackgroundImage={desktopBackgroundImage} />
-          <div className="absolute inset-0 bg-zinc-900/70" />
+          <div className="absolute inset-0 bg-primary/75" />
         </>
       )}
       <div className="relative mx-auto w-full max-w-6xl px-6 py-20 sm:py-16">

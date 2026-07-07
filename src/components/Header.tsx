@@ -103,13 +103,13 @@ export function Header() {
       </div>
 
       {isMenuOpen && (
-        <nav className="flex flex-col gap-1 border-t border-black/10 px-6 py-4 md:hidden">
+        <nav className="flex flex-col gap-1 border-t border-primary/10 px-6 py-4 md:hidden">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setIsMenuOpen(false)}
-              className="rounded-md px-2 py-2 text-sm font-medium text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900"
+              className="rounded-md px-2 py-2 text-sm font-medium text-zinc-600 hover:bg-primary/5 hover:text-zinc-900"
             >
               {item.label}
             </Link>
@@ -117,7 +117,7 @@ export function Header() {
         </nav>
       )}
 
-      <div className="h-1 bg-primary" />
+      <div className="h-1 bg-gradient-to-r from-primary to-secondary" />
     </header>
   );
 }

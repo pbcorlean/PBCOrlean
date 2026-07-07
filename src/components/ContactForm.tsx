@@ -27,7 +27,7 @@ export function ContactForm() {
           required
           value={name}
           onChange={(event) => setName(event.target.value)}
-          className="mt-1 w-full rounded-md border border-black/10 px-3 py-2 text-sm text-zinc-900 focus:border-primary focus:outline-none"
+          className="mt-1 w-full rounded-md border border-primary/10 px-3 py-2 text-sm text-zinc-900 focus:border-primary focus:outline-none"
         />
       </div>
 
@@ -41,7 +41,7 @@ export function ContactForm() {
           required
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          className="mt-1 w-full rounded-md border border-black/10 px-3 py-2 text-sm text-zinc-900 focus:border-primary focus:outline-none"
+          className="mt-1 w-full rounded-md border border-primary/10 px-3 py-2 text-sm text-zinc-900 focus:border-primary focus:outline-none"
         />
       </div>
 
@@ -55,13 +55,13 @@ export function ContactForm() {
           rows={5}
           value={message}
           onChange={(event) => setMessage(event.target.value)}
-          className="mt-1 w-full rounded-md border border-black/10 px-3 py-2 text-sm text-zinc-900 focus:border-primary focus:outline-none"
+          className="mt-1 w-full rounded-md border border-primary/10 px-3 py-2 text-sm text-zinc-900 focus:border-primary focus:outline-none"
         />
       </div>
 
       <button
         type="submit"
-        className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark"
+        className="inline-flex items-center justify-center rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-primary-dark transition-colors hover:bg-secondary-dark"
       >
         Send Message
       </button>

@@ -102,7 +102,7 @@ export function EventCalendar({ events }: EventCalendarProps) {
             type="button"
             onClick={() => goToMonth(-1)}
             aria-label="Previous month"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 text-zinc-600 transition-colors hover:bg-zinc-50"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-primary/10 text-zinc-600 transition-colors hover:bg-primary/5"
           >
             &lsaquo;
           </button>
@@ -111,7 +111,7 @@ export function EventCalendar({ events }: EventCalendarProps) {
             <button
               type="button"
               onClick={goToToday}
-              className="rounded-full border border-black/10 px-3 py-1 text-xs font-semibold text-zinc-600 transition-colors hover:bg-zinc-50"
+              className="rounded-full border border-primary/10 px-3 py-1 text-xs font-semibold text-zinc-600 transition-colors hover:bg-primary/5"
             >
               Today
             </button>
@@ -120,7 +120,7 @@ export function EventCalendar({ events }: EventCalendarProps) {
             type="button"
             onClick={() => goToMonth(1)}
             aria-label="Next month"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 text-zinc-600 transition-colors hover:bg-zinc-50"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-primary/10 text-zinc-600 transition-colors hover:bg-primary/5"
           >
             &rsaquo;
           </button>
@@ -153,18 +153,18 @@ export function EventCalendar({ events }: EventCalendarProps) {
                     ? "border-primary bg-primary/10 font-semibold text-zinc-900"
                     : isToday
                       ? "border-primary/50 text-zinc-900"
-                      : "border-transparent text-zinc-700 hover:bg-zinc-50"
+                      : "border-transparent text-zinc-700 hover:bg-primary/5"
                 }`}
               >
                 <span>{dayNumber}</span>
-                {dayEvents.length > 0 && <span className="h-1.5 w-1.5 rounded-full bg-primary" />}
+                {dayEvents.length > 0 && <span className="h-1.5 w-1.5 rounded-full bg-secondary" />}
               </button>
             );
           })}
         </div>
       </div>
 
-      <div className="mt-8 lg:mt-0 lg:flex-1 lg:border-l lg:border-black/10 lg:pl-10">
+      <div className="mt-8 lg:mt-0 lg:flex-1 lg:border-l lg:border-primary/10 lg:pl-10">
         {!selectedDate ? (
           <p className="text-sm text-zinc-600">Select a day to see its events.</p>
         ) : (
@@ -211,7 +211,7 @@ export function EventCalendar({ events }: EventCalendarProps) {
                 type="button"
                 onClick={() => setSelectedEvent(null)}
                 aria-label="Close event details"
-                className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-black/10 text-zinc-600 transition-colors hover:bg-zinc-50"
+                className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-primary/10 text-zinc-600 transition-colors hover:bg-primary/5"
               >
                 &times;
               </button>

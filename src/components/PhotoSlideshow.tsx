@@ -28,7 +28,7 @@ export function PhotoSlideshow({ images }: PhotoSlideshowProps) {
 
   return (
     <div>
-      <div className="relative h-[320px] overflow-hidden rounded-xl border border-black/10 bg-zinc-100 sm:h-[480px]">
+      <div className="relative h-[320px] overflow-hidden rounded-xl border border-primary/10 bg-zinc-100 sm:h-[480px]">
         <Image
           key={images[index]}
           src={images[index]}
@@ -44,7 +44,7 @@ export function PhotoSlideshow({ images }: PhotoSlideshowProps) {
           type="button"
           onClick={() => goTo(-1)}
           aria-label="Previous photo"
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 text-zinc-600 transition-colors hover:bg-zinc-50"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-primary/10 text-zinc-600 transition-colors hover:bg-primary/5"
         >
           &lsaquo;
         </button>
@@ -55,7 +55,7 @@ export function PhotoSlideshow({ images }: PhotoSlideshowProps) {
           type="button"
           onClick={() => goTo(1)}
           aria-label="Next photo"
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 text-zinc-600 transition-colors hover:bg-zinc-50"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-primary/10 text-zinc-600 transition-colors hover:bg-primary/5"
         >
           &rsaquo;
         </button>
