@@ -3,7 +3,7 @@ import { Hero } from "@/components/Hero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceTimesList } from "@/components/ServiceTimesList";
 import { MapEmbed } from "@/components/MapEmbed";
-import { fifthSundayNote, serviceTimes, siteConfig } from "@/lib/site-config";
+import { serviceTimes, siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Service Times",
@@ -22,7 +22,6 @@ export default function ServiceTimesPage() {
 
       <section className="mx-auto w-full max-w-6xl px-6 py-16">
         <ServiceTimesList services={serviceTimes} />
-        <p className="mt-4 text-sm text-zinc-500">{fifthSundayNote}</p>
       </section>
 
       <section className="border-t border-primary/10 bg-primary/15">

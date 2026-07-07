@@ -71,7 +71,3 @@ export const serviceTimes: ServiceTime[] = [
     description: "Midweek study and prayer gathering for the whole family.",
   },
 ];
-
-// Note: there is no service on a fifth Sunday, when a month has one.
-export const fifthSundayNote =
-  "On months with a fifth Sunday, there is no service that day.";
