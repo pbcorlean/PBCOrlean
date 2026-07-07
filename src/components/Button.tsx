@@ -13,7 +13,7 @@ export function Button({ href, children, variant = "primary" }: ButtonProps) {
   const variantClasses =
     variant === "primary"
       ? "bg-primary text-white hover:bg-primary-dark"
-      : "border border-white/30 text-white hover:bg-white/10";
+      : "border border-current/30 hover:bg-current/10";
 
   return (
     <Link href={href} className={`${baseClasses} ${variantClasses}`}>

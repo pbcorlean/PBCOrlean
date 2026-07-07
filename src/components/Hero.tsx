@@ -87,27 +87,48 @@ export function Hero({
   }
 
   return (
-    <section className="relative overflow-hidden border-b border-primary/10 bg-primary sm:flex sm:min-h-[92vh] sm:items-end">
-      {backgroundImage && (
-        <>
-          <HeroBackground backgroundImage={backgroundImage} desktopBackgroundImage={desktopBackgroundImage} />
-          <div className="absolute inset-0 bg-primary/50" />
-        </>
-      )}
-      <div className="relative mx-auto w-full max-w-6xl px-6 py-20 sm:py-16">
-        {eyebrow && (
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary-light">
-            {eyebrow}
-          </p>
-        )}
-        <h1 className="mt-3 max-w-2xl text-2xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-          {title}
-        </h1>
-        {description && (
-          <p className="mt-5 max-w-xl text-lg text-zinc-300">{description}</p>
-        )}
-        {children && <div className="mt-8 flex flex-wrap gap-3 sm:gap-4">{children}</div>}
+    <>
+      {/* Mobile: plain banner image, then the text below it (no overlay) so
+          the photo's own text isn't fought over by the caption text. */}
+      <div className="relative h-[350px] overflow-hidden border-b border-primary/10 bg-white sm:hidden">
+        <HeroBackground
+          backgroundImage={backgroundImage}
+          desktopBackgroundImage={desktopBackgroundImage}
+          desktopFit="contain"
+        />
       </div>
-    </section>
+      <div className="px-6 py-10 sm:hidden">
+        {eyebrow && (
+          <p className="text-sm font-semibold uppercase tracking-wider text-primary">{eyebrow}</p>
+        )}
+        <h1 className="mt-3 text-2xl font-bold tracking-tight text-zinc-900">{title}</h1>
+        {description && <p className="mt-3 text-lg text-zinc-600">{description}</p>}
+        {children && <div className="mt-6 flex flex-wrap gap-3 text-zinc-900">{children}</div>}
+      </div>
+
+      {/* sm and up: full-bleed photo with the caption overlaid on top. */}
+      <section className="relative hidden overflow-hidden border-b border-primary/10 bg-primary sm:flex sm:min-h-[92vh] sm:items-end">
+        {backgroundImage && (
+          <>
+            <HeroBackground backgroundImage={backgroundImage} desktopBackgroundImage={desktopBackgroundImage} />
+            <div className="absolute inset-0 bg-primary/50" />
+          </>
+        )}
+        <div className="relative mx-auto w-full max-w-6xl px-6 py-16">
+          {eyebrow && (
+            <p className="text-sm font-semibold uppercase tracking-wider text-primary-light">
+              {eyebrow}
+            </p>
+          )}
+          <h1 className="mt-3 max-w-2xl text-4xl font-bold tracking-tight text-white lg:text-5xl">
+            {title}
+          </h1>
+          {description && (
+            <p className="mt-5 max-w-xl text-lg text-zinc-300">{description}</p>
+          )}
+          {children && <div className="mt-8 flex flex-wrap gap-4 text-white">{children}</div>}
+        </div>
+      </section>
+    </>
   );
 }
