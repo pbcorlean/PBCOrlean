@@ -12,10 +12,10 @@
   --color-white: #ffffff;
   --color-black: #000000;
 
-  /* Main brand color, sampled from the church's front door. */
-  --color-primary: #2f9e89;
-  --color-primary-light: #8fe4d2;
-  --color-primary-dark: #1f7a69;
+  /* Main brand color. */
+  --color-primary: #3a3450;
+  --color-primary-light: #c4c2cb;
+  --color-primary-dark: #292438;
 }
 
 @theme inline {
