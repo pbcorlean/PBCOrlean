@@ -36,7 +36,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-t border-primary/10 bg-primary/8">
+      <section className="border-t border-primary/10 bg-primary/15">
         <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-16 lg:grid-cols-2 lg:items-center">
           <SectionHeading
             eyebrow="Our Mission"

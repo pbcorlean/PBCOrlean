@@ -91,7 +91,7 @@ export function Hero({
       {backgroundImage && (
         <>
           <HeroBackground backgroundImage={backgroundImage} desktopBackgroundImage={desktopBackgroundImage} />
-          <div className="absolute inset-0 bg-primary/75" />
+          <div className="absolute inset-0 bg-primary/50" />
         </>
       )}
       <div className="relative mx-auto w-full max-w-6xl px-6 py-20 sm:py-16">
