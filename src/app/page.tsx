@@ -15,7 +15,7 @@ export default function Home() {
         desktopBackgroundImage="/pictures/Homepage-hero-desktop.png"
         size="large"
       >
-        <Button href="/service-times">Plan Your Visit</Button>
+        <Button href="/events">Plan Your Visit</Button>
         <Button href="/about" variant="secondary">
           Learn More About Us
         </Button>
