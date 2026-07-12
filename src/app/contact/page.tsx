@@ -28,7 +28,7 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <div>
+        <div id="google-map" className="scroll-mt-24">
           <SectionHeading eyebrow="Details" title="Our Location" />
           <address className="mt-6 space-y-2 text-sm not-italic text-zinc-600">
             <p>{siteConfig.address.street}</p>

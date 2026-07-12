@@ -40,7 +40,7 @@ export default function Home() {
             description={`${siteConfig.address.street}, ${siteConfig.address.city}, ${siteConfig.address.state} ${siteConfig.address.zip}`}
           />
           <div className="mt-8">
-            <Button href="/contact">Get Directions</Button>
+            <Button href="/contact#google-map">Get Directions</Button>
           </div>
         </div>
       </section>
