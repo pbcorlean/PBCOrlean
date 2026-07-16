@@ -21,6 +21,21 @@ export default function Home() {
         </Button>
       </Hero>
 
+      <section className="border-b border-primary/10 bg-secondary/15">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-5 px-6 py-8 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wider text-primary">We&apos;re Hiring</p>
+            <h2 className="mt-1 text-2xl font-bold tracking-tight text-zinc-900">
+              Providence Baptist Church is seeking a Senior Pastor
+            </h2>
+            <p className="mt-2 text-zinc-600">Bivocational position &middot; Open until filled</p>
+          </div>
+          <div className="shrink-0">
+            <Button href="/employment">View Opportunity</Button>
+          </div>
+        </div>
+      </section>
+
       <section className="mx-auto w-full max-w-6xl px-6 py-16">
         <SectionHeading
           eyebrow="Join Us"

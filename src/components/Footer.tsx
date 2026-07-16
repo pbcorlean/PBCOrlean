@@ -69,6 +69,9 @@ export function Footer() {
             &copy; {year} {siteConfig.name}. All rights reserved.
           </p>
           <nav className="flex gap-4">
+            <Link href="/employment" className="hover:text-zinc-700">
+              Employment
+            </Link>
             {navItems.map((item) => (
               <Link key={item.href} href={item.href} className="hover:text-zinc-700">
                 {item.label}
