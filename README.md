@@ -19,9 +19,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## YouTube livestream detection
 
 Set `YOUTUBE_API_KEY` in `.env.local` and in the production hosting environment. The
-Sermons page uses the YouTube Data API to detect when `@pbcorlean` is actively live.
-While live, it shows the livestream player; otherwise, it shows the previous-sermons
-playlist. The live-status result is refreshed every 60 seconds.
+Sermons page uses the YouTube Data API to inspect the church sermon playlist for an
+active livestream. While live, it shows the livestream player and chat; otherwise, it
+shows the previous-sermons playlist. Add each scheduled stream to the playlist so it
+can be detected. The live-status result is refreshed every 60 seconds.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 

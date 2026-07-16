@@ -7,23 +7,17 @@ export interface Sermon {
   videoUrl: string;
 }
 
-export interface LiveStream {
-  channelHandle: string;
-  watchUrl: string;
-}
-
 export interface SermonPlaylist {
+  channelUploadsPlaylistId: string;
   embedUrl: string;
+  playlistId: string;
   watchUrl: string;
 }
-
-export const liveStream: LiveStream = {
-  channelHandle: "pbcorlean",
-  watchUrl: "https://www.youtube.com/@pbcorlean/live",
-};
 
 export const sermonPlaylist: SermonPlaylist = {
+  channelUploadsPlaylistId: "UUdn1DbwW3vafQ7lf3cMG0jw",
   embedUrl: "https://www.youtube.com/embed/videoseries?list=PLCIya7u0546I",
+  playlistId: "PLCIya7u0546I",
   watchUrl: "https://www.youtube.com/playlist?list=PLCIya7u0546I",
 };
 
