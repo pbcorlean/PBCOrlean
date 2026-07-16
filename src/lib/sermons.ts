@@ -12,9 +12,10 @@ export interface LiveStream {
   watchUrl?: string;
 }
 
-// Add the church's livestream embed and watch URLs here when the
-// streaming channel is ready. The Sermons page will update automatically.
-export const liveStream: LiveStream = {};
+export const liveStream: LiveStream = {
+  embedUrl: "https://www.youtube.com/embed/26WlPaU-3b4",
+  watchUrl: "https://www.youtube.com/@pbcorlean/live",
+};
 
 // Add completed sermon recordings here. Example:
 // {
