@@ -16,9 +16,9 @@ export interface SermonPlaylist {
 
 export const sermonPlaylist: SermonPlaylist = {
   channelUploadsPlaylistId: "UUdn1DbwW3vafQ7lf3cMG0jw",
-  embedUrl: "https://www.youtube.com/embed/videoseries?list=PLCIya7u0546I",
-  playlistId: "PLCIya7u0546I",
-  watchUrl: "https://www.youtube.com/playlist?list=PLCIya7u0546I",
+  embedUrl: "https://www.youtube.com/embed/videoseries?list=PLUv5wXnQef_4",
+  playlistId: "PLUv5wXnQef_4",
+  watchUrl: "https://www.youtube.com/playlist?list=PLUv5wXnQef_4",
 };
 
 // Add completed sermon recordings here. Example:
