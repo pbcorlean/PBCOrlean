@@ -8,13 +8,23 @@ export interface Sermon {
 }
 
 export interface LiveStream {
-  embedUrl?: string;
-  watchUrl?: string;
+  channelHandle: string;
+  watchUrl: string;
+}
+
+export interface SermonPlaylist {
+  embedUrl: string;
+  watchUrl: string;
 }
 
 export const liveStream: LiveStream = {
-  embedUrl: "https://www.youtube.com/embed/26WlPaU-3b4",
+  channelHandle: "pbcorlean",
   watchUrl: "https://www.youtube.com/@pbcorlean/live",
+};
+
+export const sermonPlaylist: SermonPlaylist = {
+  embedUrl: "https://www.youtube.com/embed/videoseries?list=PLCIya7u0546I",
+  watchUrl: "https://www.youtube.com/playlist?list=PLCIya7u0546I",
 };
 
 // Add completed sermon recordings here. Example:

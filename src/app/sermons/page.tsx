@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
 import { SectionHeading } from "@/components/SectionHeading";
-import { liveStream, sermons } from "@/lib/sermons";
+import { sermonPlaylist, sermons } from "@/lib/sermons";
+import { getActiveYouTubeStream } from "@/lib/youtube";
 
 export const metadata: Metadata = {
   title: "Sermons",
@@ -16,7 +17,9 @@ function formatSermonDate(date: string) {
   });
 }
 
-export default function SermonsPage() {
+export default async function SermonsPage() {
+  const activeStream = await getActiveYouTubeStream();
+
   return (
     <>
       <Hero
@@ -27,41 +30,27 @@ export default function SermonsPage() {
         desktopBackgroundImage="/pictures/secondary-hero-desktop.png"
       />
 
-      <section className="mx-auto w-full max-w-6xl px-6 py-16">
-        <SectionHeading
-          eyebrow="Worship Online"
-          title="Watch Live"
-          description="Join our worship service from wherever you are."
-        />
+      {activeStream ? (
+        <section className="mx-auto w-full max-w-6xl px-6 py-16">
+          <SectionHeading
+            eyebrow="Live Now"
+            title="Watch Live"
+            description="Join our worship service from wherever you are."
+          />
 
-        <div className="mt-8 overflow-hidden rounded-2xl border border-primary/10 bg-primary-dark shadow-lg">
-          {liveStream.embedUrl ? (
+          <div className="mt-8 overflow-hidden rounded-2xl border border-primary/10 bg-primary-dark shadow-lg">
             <iframe
-              src={liveStream.embedUrl}
+              src={activeStream.embedUrl}
               title="Providence Baptist Church livestream"
               className="aspect-video w-full"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />
-          ) : (
-            <div className="flex aspect-video min-h-72 flex-col items-center justify-center px-6 text-center text-white">
-              <span className="rounded-full bg-secondary px-4 py-1 text-xs font-bold uppercase tracking-widest text-primary-dark">
-                Coming Soon
-              </span>
-              <h2 className="mt-5 text-2xl font-bold sm:text-3xl">Livestream will appear here</h2>
-              <p className="mt-3 max-w-xl text-sm text-primary-light sm:text-base">
-                We are preparing online worship. Once the church&apos;s streaming channel is connected,
-                you will be able to watch services directly from this page.
-              </p>
-            </div>
-          )}
-        </div>
-
-        {liveStream.watchUrl && (
+          </div>
           <p className="mt-4 text-center text-sm text-zinc-600">
             Having trouble with the player?{" "}
             <a
-              href={liveStream.watchUrl}
+              href={activeStream.watchUrl}
               target="_blank"
               rel="noreferrer"
               className="font-semibold text-primary underline decoration-secondary decoration-2 underline-offset-4"
@@ -69,19 +58,38 @@ export default function SermonsPage() {
               Watch on our streaming channel
             </a>
           </p>
-        )}
-      </section>
-
-      <section className="border-t border-primary/10 bg-primary/5">
-        <div className="mx-auto w-full max-w-6xl px-6 py-16">
+        </section>
+      ) : (
+        <section className="border-t border-primary/10 bg-primary/5">
+          <div className="mx-auto w-full max-w-6xl px-6 py-16">
           <SectionHeading
             eyebrow="Sermon Library"
             title="Previous Sermons"
-            description="Watch previous messages and revisit them anytime."
+            description="Watch previous services and revisit them anytime."
           />
 
+          <div className="mt-8 overflow-hidden rounded-2xl border border-primary/10 bg-primary-dark shadow-lg">
+            <iframe
+              src={sermonPlaylist.embedUrl}
+              title="Providence Baptist Church previous sermons"
+              className="aspect-video w-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+          <p className="mt-4 text-center text-sm text-zinc-600">
+            <a
+              href={sermonPlaylist.watchUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-primary underline decoration-secondary decoration-2 underline-offset-4"
+            >
+              View the complete sermon playlist on YouTube
+            </a>
+          </p>
+
           {sermons.length > 0 ? (
-            <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {sermons.map((sermon) => (
                 <article key={sermon.id} className="overflow-hidden rounded-xl border border-primary/10 bg-white shadow-sm">
                   <a href={sermon.videoUrl} target="_blank" rel="noreferrer" className="group block">
@@ -101,16 +109,10 @@ export default function SermonsPage() {
                 </article>
               ))}
             </div>
-          ) : (
-            <div className="mt-8 rounded-xl border border-dashed border-primary/20 bg-white px-6 py-12 text-center">
-              <h2 className="text-xl font-semibold text-zinc-900">Recordings are coming soon</h2>
-              <p className="mx-auto mt-2 max-w-xl text-sm text-zinc-600">
-                Previous services will be added here as recordings become available.
-              </p>
-            </div>
-          )}
-        </div>
-      </section>
+          ) : null}
+          </div>
+        </section>
+      )}
     </>
   );
 }
